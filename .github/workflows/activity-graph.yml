@@ -30,6 +30,14 @@ jobs:
           output_path: activity-graph.svg
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      # The card draws its line with a CSS animation (stroke-dashoffset).
+      # GitHub renders README images in static mode, so the first frame
+      # would be an empty chart. Strip the animation to keep the graph visible.
+      - name: Make SVG static
+        run: |
+          perl -0pi -e 's/\@keyframes\s+(?:dash|blink)\s*\{(?:[^{}]*\{[^}]*\})*[^}]*\}\s*//g; s/stroke-dasharray:\s*5000;\s*//g; s/stroke-dashoffset:\s*5000;\s*//g; s/animation:\s*(?:dash|blink)[^;]*;\s*//g' activity-graph.svg
+          grep -q "stroke-dashoffset" activity-graph.svg && exit 1 || true
+
       - name: Commit updated SVG
         run: |
           if git diff --quiet -- activity-graph.svg; then
