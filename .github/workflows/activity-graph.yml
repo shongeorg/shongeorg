@@ -1,0 +1,44 @@
+name: Update Activity Graph
+
+on:
+  schedule:
+    # every 6 hours
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - "activity-graph.svg"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Generate activity graph
+        uses: maurodesouza/github-readme-activity-graph-action@v1
+        with:
+          username: shongeorg
+          options: theme=github-dark&hide_border=true&color=58A6FF&line=58A6FF&point=58A6FF&bg_color=0d1117
+          output_path: activity-graph.svg
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit updated SVG
+        run: |
+          if git diff --quiet -- activity-graph.svg; then
+            echo "Activity graph is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add activity-graph.svg
+          git commit -m "chore: update activity graph"
+          git push

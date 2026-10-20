@@ -41,7 +41,7 @@
 ## 📈 Activity Graph
 
 <p align="center">
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=shongeorg&theme=github-dark&hide_border=true&color=58A6FF&line=58A6FF&point=58A6FF&bg_color=0d1117" alt="Activity Graph" width="100%"/>
+  <img src="https://raw.githubusercontent.com/shongeorg/shongeorg/main/activity-graph.svg" alt="Activity Graph" width="100%"/>
 </p>
 
 ---
@@ -55,7 +55,9 @@
 </p>
 
 <p align="center">
-  <img src="https://komarev.com/ghpvc/?username=shongeorg&style=for-the-badge&color=58A6FF" alt="Profile Views"/>
+  <a href="https://hits.sh/github.com/shongeorg/">
+    <img src="https://hits.sh/github.com/shongeorg.svg?style=for-the-badge&label=Profile%20Views&color=58A6FF&labelColor=161b22" alt="Profile Views"/>
+  </a>
 </p>
 
 ---
